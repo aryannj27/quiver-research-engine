@@ -11,7 +11,7 @@ Every Sunday evening, one command (`python run.py`) does what David currently do
 **LLMs are bad at anomaly detection. They are good at narration.** So the pipeline splits those jobs cleanly:
 
 1. **Pull layer** (`pull.py`) — hits Quiver's live endpoints, caches raw JSON to disk. Handles Quiver's flaky bulk endpoints gracefully (insider/lobbying `/all` endpoints were returning DB timeouts and 404s during development — the pipeline degrades rather than crashes).
-2. **Scoring layer** (`score.py`) — **100% deterministic Python**. Six editorial-scoring rules, each auditable, each tunable. Claude never sees raw data until scoring is done.
+2. **Scoring layer** (`score.py`) — **100% deterministic Python**. Seven editorial-scoring rules, each auditable, each tunable. Claude never sees raw data until scoring is done.
 3. **Narration layer** (`narrate.py`) — Claude Sonnet takes the top-N ranked leads and drafts newsletter-ready pitches, angles, draft headlines, and verification steps. Few-shot prompted in Quiver's editorial voice.
 4. **Brief layer** (`brief.py`) — renders a single self-contained HTML file. David opens it Monday, picks what to write about.
 
