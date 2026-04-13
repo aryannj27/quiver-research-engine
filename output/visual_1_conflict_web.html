@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Visual Concept 1 — The Conflict Web</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+       background: #f5f5f7; color: #1d1d1f; padding: 32px; }
+.wrap { max-width: 1000px; margin: 0 auto; }
+.header { margin-bottom: 24px; }
+.eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+           color: #FF1D58; margin-bottom: 8px; }
+h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 6px; }
+.sub { color: #636366; font-size: 1rem; margin-bottom: 20px; }
+.card { background: #fff; border-radius: 14px; padding: 24px; border: 1px solid rgba(0,0,0,0.06);
+        margin-bottom: 16px; }
+.card h2 { font-size: 1.15rem; font-weight: 600; margin-bottom: 10px; }
+.card p { color: #424245; font-size: 0.95rem; margin-bottom: 8px; }
+.label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+         color: #86868b; margin-bottom: 6px; }
+.insight-line { font-size: 1.1rem; font-weight: 500; color: #1d1d1f; margin-bottom: 6px;
+                letter-spacing: -0.2px; }
+.sowhat { background: linear-gradient(135deg, #FF1D58 0%, #ff4080 100%); color: #fff;
+          border-radius: 10px; padding: 14px 18px; margin-top: 12px; }
+.sowhat .label { color: rgba(255,255,255,0.75); }
+.sowhat p { color: #fff; margin: 0; font-size: 0.95rem; }
+svg.web { width: 100%; height: 540px; display: block; }
+.legend { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 12px; font-size: 0.82rem; color: #636366; }
+.legend-dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%;
+              vertical-align: middle; margin-right: 6px; }
+.tooltip { position: absolute; background: #1d1d1f; color: #fff; padding: 8px 12px;
+           border-radius: 6px; font-size: 0.82rem; pointer-events: none; opacity: 0;
+           transition: opacity 0.15s; max-width: 260px; line-height: 1.4; z-index: 10; }
+.node-label { font-size: 11px; font-weight: 600; fill: #1d1d1f; pointer-events: none; }
+.node-label-sub { font-size: 9px; fill: #636366; pointer-events: none; }
+.link { stroke-opacity: 0.5; fill: none; }
+.link-conflict { stroke: #FF1D58; stroke-width: 2.5; stroke-dasharray: 4,3; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="header">
+  <div class="eyebrow">Visual Concept 1 of 2</div>
+  <h1>The Conflict Web</h1>
+  <p class="sub">Interactive network diagram that visualizes the "Pelosi Principle" in one glance — how a single congressional trade connects to committee jurisdiction, corporate lobbying, and dollar flow.</p>
+</div>
+
+<div class="card">
+  <div class="label">The Insight</div>
+  <p class="insight-line">A congressional trade is rarely isolated. The real story lives in the web around it.</p>
+  <p>When Rep. Gottheimer bought $500k+ in MSFT call options on March 25, it was not one data point — it was a node in a web. MSFT was simultaneously spending $170k+ on federal lobbying focused on AI, Section 230, FISA 702, and cybersecurity. Gottheimer sits on House Financial Services. The options had a 3-month expiry window coinciding with pending AI legislation markup.</p>
+  <p>Retail investors reading the newsletter see the trade. They do not see the web. This visual makes the web legible in 3 seconds.</p>
+</div>
+
+<div class="card">
+  <div class="label">Live Prototype — Hover any node</div>
+  <div style="position:relative;">
+    <svg class="web" viewBox="0 0 1000 540"></svg>
+    <div class="tooltip" id="tooltip"></div>
+  </div>
+  <div class="legend">
+    <span><span class="legend-dot" style="background:#FF1D58"></span>Member of Congress</span>
+    <span><span class="legend-dot" style="background:#007AFF"></span>Committee / Jurisdiction</span>
+    <span><span class="legend-dot" style="background:#34C759"></span>Company (Ticker)</span>
+    <span><span class="legend-dot" style="background:#AF52DE"></span>Lobbying Issue</span>
+    <span><span class="legend-dot" style="background:#FF9500"></span>Trade</span>
+    <span style="border-left:2px dashed #FF1D58;padding-left:8px;">= potential conflict</span>
+  </div>
+</div>
+
+<div class="card">
+  <div class="label">The Design — How It's Built</div>
+  <p>Force-directed network graph (D3.js). Nodes sized by dollar magnitude, colored by entity type. Solid edges represent declared relationships (committee membership, lobbying filing, trade disclosure). Dashed red edges indicate the potential conflict path — where jurisdiction, lobbying, and trade converge on the same ticker within a 90-day window.</p>
+  <p>In production: one Conflict Web per top-ranked lead in the Sunday brief. Each is a PNG export for newsletter embedding, plus an interactive version on the Quiver site that retail subscribers can explore.</p>
+</div>
+
+<div class="card">
+  <div class="sowhat">
+    <div class="label">The "So What" — if a retail investor sees this at 7 AM Tuesday</div>
+    <p>They do not need to understand politics or lobbying law. They see a triangle: Congressperson → Committee → Company, with dollars on each edge. They understand instantly: <strong>this person had information, this company was spending money to influence that person's committee, and this person put money in that company.</strong> That is the entire premise of the newsletter, rendered visually.</p>
+  </div>
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script>
+// Real data from the 4/13 Quiver API pull
+const nodes = [
+  { id: "gottheimer", label: "Josh Gottheimer",      sub: "D-NJ, Rep.",        type: "person",    r: 26, color: "#FF1D58" },
+  { id: "hfs",        label: "House Financial Svcs", sub: "committee",         type: "committee", r: 20, color: "#007AFF" },
+  { id: "msft",       label: "MSFT",                 sub: "Microsoft Corp.",   type: "ticker",    r: 28, color: "#34C759" },
+  { id: "lob_ai",     label: "AI Policy",            sub: "$80K · 2026",       type: "issue",     r: 15, color: "#AF52DE" },
+  { id: "lob_230",    label: "Section 230",          sub: "$50K · 2026",       type: "issue",     r: 14, color: "#AF52DE" },
+  { id: "lob_fisa",   label: "FISA 702",             sub: "$40K · 2026",       type: "issue",     r: 13, color: "#AF52DE" },
+  { id: "trade_call", label: "Call Options",         sub: "$500K–$1M · 3/25",  type: "trade",     r: 22, color: "#FF9500" },
+  { id: "trade_sm",   label: "Call Options",         sub: "$50K–$100K · 3/25", type: "trade",     r: 16, color: "#FF9500" },
+];
+
+const links = [
+  { source: "gottheimer", target: "hfs",        label: "sits on",       kind: "normal" },
+  { source: "hfs",        target: "msft",       label: "jurisdiction",  kind: "normal" },
+  { source: "msft",       target: "lob_ai",     label: "$80K spend",    kind: "normal" },
+  { source: "msft",       target: "lob_230",    label: "$50K spend",    kind: "normal" },
+  { source: "msft",       target: "lob_fisa",   label: "$40K spend",    kind: "normal" },
+  { source: "gottheimer", target: "trade_call", label: "executed",      kind: "normal" },
+  { source: "gottheimer", target: "trade_sm",   label: "executed",      kind: "normal" },
+  { source: "trade_call", target: "msft",       label: "position in",   kind: "normal" },
+  { source: "trade_sm",   target: "msft",       label: "position in",   kind: "normal" },
+  // The critical dashed conflict link:
+  { source: "gottheimer", target: "msft",       label: "potential conflict", kind: "conflict" },
+];
+
+const tooltipData = {
+  gottheimer: "Josh Gottheimer (D-NJ). House Rep. Known active trader — disclosed multiple options positions in March 2026.",
+  hfs:        "House Financial Services Committee. Jurisdiction over tech regulation, antitrust, AI financial applications.",
+  msft:       "Microsoft Corp. Active federal lobbyist — $170K+ disclosed in 2026 YTD across AI, privacy, tax.",
+  lob_ai:     "AI policy lobbying. Microsoft retained firms in April 2026 to monitor AI legislation.",
+  lob_230:    "Section 230 / platform liability. Active congressional debate throughout 2026.",
+  lob_fisa:   "FISA Section 702 reauthorization. Expires Dec 2026 — active lobbying cycle.",
+  trade_call: "Purchase of MSFT call options, strike $320, expires 6/18/2026. Disclosed range $500K–$1M.",
+  trade_sm:   "Purchase of MSFT call options, strike $325, expires 6/18/2026. Disclosed range $50K–$100K.",
+};
+
+const svg = d3.select("svg.web");
+const width = 1000, height = 540;
+const tooltip = d3.select("#tooltip");
+
+const simulation = d3.forceSimulation(nodes)
+  .force("link",   d3.forceLink(links).id(d => d.id).distance(120).strength(0.6))
+  .force("charge", d3.forceManyBody().strength(-550))
+  .force("center", d3.forceCenter(width / 2, height / 2))
+  .force("collide", d3.forceCollide().radius(d => d.r + 18));
+
+const link = svg.append("g").selectAll("line")
+  .data(links).join("line")
+  .attr("class", d => d.kind === "conflict" ? "link link-conflict" : "link")
+  .attr("stroke", d => d.kind === "conflict" ? "#FF1D58" : "#c7c7cc")
+  .attr("stroke-width", d => d.kind === "conflict" ? 2.5 : 1.5);
+
+const linkLabel = svg.append("g").selectAll("text")
+  .data(links).join("text")
+  .attr("font-size", 9).attr("fill", "#86868b").attr("text-anchor", "middle")
+  .text(d => d.label);
+
+const node = svg.append("g").selectAll("g")
+  .data(nodes).join("g")
+  .call(d3.drag()
+    .on("start", (e, d) => { if (!e.active) simulation.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+    .on("drag",  (e, d) => { d.fx = e.x; d.fy = e.y; })
+    .on("end",   (e, d) => { if (!e.active) simulation.alphaTarget(0); d.fx = null; d.fy = null; }))
+  .on("mouseover", (e, d) => {
+    tooltip.style("opacity", 1).html(`<strong>${d.label}</strong><br>${tooltipData[d.id] || d.sub}`);
+  })
+  .on("mousemove", (e) => {
+    tooltip.style("left", (e.pageX + 12) + "px").style("top", (e.pageY + 12) + "px");
+  })
+  .on("mouseout", () => tooltip.style("opacity", 0));
+
+node.append("circle")
+  .attr("r", d => d.r)
+  .attr("fill", d => d.color)
+  .attr("fill-opacity", 0.85)
+  .attr("stroke", "#fff").attr("stroke-width", 2);
+
+node.append("text")
+  .attr("class", "node-label")
+  .attr("text-anchor", "middle")
+  .attr("dy", d => d.r + 14)
+  .text(d => d.label);
+
+node.append("text")
+  .attr("class", "node-label-sub")
+  .attr("text-anchor", "middle")
+  .attr("dy", d => d.r + 26)
+  .text(d => d.sub);
+
+simulation.on("tick", () => {
+  link
+    .attr("x1", d => d.source.x).attr("y1", d => d.source.y)
+    .attr("x2", d => d.target.x).attr("y2", d => d.target.y);
+  linkLabel
+    .attr("x", d => (d.source.x + d.target.x) / 2)
+    .attr("y", d => (d.source.y + d.target.y) / 2 - 2);
+  node.attr("transform", d => `translate(${d.x},${d.y})`);
+});
+</script>
+</body>
+</html>

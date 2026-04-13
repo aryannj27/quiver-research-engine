@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8">
+<title>Quiver Sunday Research Brief — 2026-04-13</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+       background: #f5f5f7; color: #1d1d1f; line-height: 1.55; padding: 24px; }
+.wrap { max-width: 900px; margin: 0 auto; }
+.header { background: #000; color: #fff; border-radius: 16px; padding: 28px 32px; margin-bottom: 24px;
+           background: linear-gradient(135deg, #000 0%, #1a1a2e 100%); position: relative; overflow: hidden; }
+.header::after { content: ''; position: absolute; top: -40px; right: -40px; width: 180px; height: 180px;
+                  background: radial-gradient(circle, rgba(255,29,88,0.2) 0%, transparent 70%); }
+.eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+            color: #FF1D58; margin-bottom: 10px; }
+.header h1 { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 6px; }
+.header .sub { color: #c7c7cc; font-size: 0.95rem; }
+.meta-bar { display: flex; gap: 12px; margin-top: 18px; flex-wrap: wrap; position: relative; z-index: 1; }
+.meta-cell { background: rgba(255,255,255,0.08); padding: 8px 14px; border-radius: 8px; font-size: 0.85rem; }
+.meta-cell strong { color: #fff; }
+
+.summary { background: #fff; border-radius: 14px; padding: 20px 24px; margin-bottom: 24px;
+            border: 1px solid rgba(0,0,0,0.06); }
+.summary-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+                  color: #86868b; margin-bottom: 12px; }
+.summary-chip { display: inline-block; background: #f5f5f7; padding: 5px 12px; border-radius: 6px;
+                 font-size: 0.82rem; font-weight: 500; margin: 0 6px 6px 0; border: 1px solid #e5e5e7; }
+
+.lead-card { background: #fff; border-radius: 14px; padding: 22px 26px; margin-bottom: 14px;
+              border: 1px solid rgba(0,0,0,0.06); }
+.lead-header { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+.lead-rank { font-size: 1.4rem; font-weight: 700; color: #86868b; min-width: 36px; }
+.lead-meta { display: flex; gap: 8px; flex-wrap: wrap; }
+.rule-chip, .score-chip, .conf-chip {
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+  padding: 4px 10px; border-radius: 5px; border: 1px solid transparent; }
+.score-chip { background: #f5f5f7; color: #424245; border-color: #e5e5e7; }
+.conf-chip { background: transparent; }
+.lead-pitch { font-size: 1.08rem; font-weight: 600; color: #1d1d1f; margin-bottom: 8px;
+               letter-spacing: -0.2px; }
+.lead-meta-line { font-size: 0.86rem; color: #636366; margin-bottom: 12px;
+                   padding-bottom: 12px; border-bottom: 1px solid #f0f0f2; }
+.lead-meta-line strong { color: #1d1d1f; }
+.lead-angle { font-size: 0.92rem; color: #424245; margin-bottom: 14px; }
+
+.mini-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;
+               color: #86868b; margin-bottom: 6px; }
+.headlines, .verify { background: #fafafb; border-radius: 8px; padding: 12px 14px; margin-bottom: 10px; }
+.headline-opt { font-size: 0.9rem; color: #1d1d1f; margin: 3px 0; font-weight: 500; }
+.verify ul { margin: 0; padding-left: 22px; font-size: 0.88rem; color: #424245; }
+.verify li { margin: 3px 0; }
+
+.evidence { margin-top: 8px; font-size: 0.82rem; }
+.evidence summary { cursor: pointer; color: #007AFF; padding: 4px 0; }
+.evidence-row { background: #f5f5f7; padding: 8px 12px; margin: 4px 0; border-radius: 6px;
+                  font-family: 'SF Mono', Menlo, monospace; font-size: 0.75rem; color: #424245;
+                  word-break: break-word; }
+
+.footer { text-align: center; padding: 24px; color: #86868b; font-size: 0.82rem; }
+</style></head>
+<body><div class="wrap">
+<div class="header">
+  <div class="eyebrow">Quiver Research Engine · Sunday Brief</div>
+  <h1>The Monday Leads · 2026-04-13</h1>
+  <div class="sub">Automated research sprint. 10 scored leads, 10 narrated by Claude.</div>
+  <div class="meta-bar">
+    <div class="meta-cell">Run: <strong>2026-04-13 18:42 UTC</strong></div>
+    <div class="meta-cell">Congress trades scanned: <strong>126</strong></div>
+    <div class="meta-cell">Dark-pool tickers: <strong>5408</strong></div>
+    <div class="meta-cell">Enriched tickers: <strong>15</strong></div>
+  </div>
+</div>
+<div class="summary">
+  <div class="summary-title">Anomalies Surfaced</div>
+  <span class="summary-chip">Trade ×  Lobbying: 6</span> <span class="summary-chip">Dark-Pool Confluence: 2</span> <span class="summary-chip">Options Leverage: 1</span> <span class="summary-chip">Member Cluster: 1</span>
+</div>
+
+    <div class="lead-card">
+      <div class="lead-header">
+        <div class="lead-rank">#1</div>
+        <div class="lead-meta">
+          <span class="rule-chip" style="background:#FF1D5815;color:#FF1D58;border-color:#FF1D5840">Options Leverage</span>
+          <span class="score-chip">Score 95</span>
+          <span class="conf-chip" style="color:#34C759">● HIGH</span>
+        </div>
+      </div>
+      <div class="lead-pitch">Gottheimer dropped up to $1M on leveraged MSFT calls expiring June 2026 — a high-conviction directional bet from a sitting congressman.</div>
+      <div class="lead-meta-line">
+        <strong>Josh Gottheimer</strong> · $MSFT · $500,001 - $1,000,000
+      </div>
+      <div class="lead-angle">A ~$750K options position in MSFT calls is not a passive index bet — it&#x27;s a leveraged directional wager with a hard expiry. Gottheimer sits on the House Financial Services Committee, which has jurisdiction over fintech and digital markets legislation that directly touches Microsoft&#x27;s cloud and AI business. The June 2026 expiry aligns suspiciously well with expected Congressional action on AI regulation and government cloud procurement timelines. Worth digging into whether any classified or committee-level briefings on tech regulation preceded the trade.</div>
+      <div class="headlines"><div class="mini-label">Draft Headlines</div><div class="headline-opt">• Gottheimer&#x27;s $1M MSFT Call Bet</div><div class="headline-opt">• The Congressman&#x27;s Leveraged Microsoft Gamble</div><div class="headline-opt">• Gottheimer Bets Big on MSFT Calls</div></div>
+      <div class="verify"><div class="mini-label">Verify Before Publishing</div><ul><li>Pull Gottheimer&#x27;s full disclosure filing on the House Clerk&#x27;s website and confirm the options details (strike $320, expiry 06/18/2026)</li><li>Check Gottheimer&#x27;s committee assignments and recent hearing schedule — specifically any MSFT-adjacent AI, cloud, or cybersecurity legislation</li><li>Review Gottheimer&#x27;s prior MSFT trading history for pattern of options activity around legislative milestones</li></ul></div>
+      <details class="evidence">
+        <summary>Raw data (1 record)</summary>
+        <div class="evidence-row">Representative: Josh Gottheimer · TransactionDate: 2026-03-25 · Ticker: MSFT · Transaction: Purchase · Range: $500,001 - $1,000,000 · Amount: 500001.0 · Description: CALL OPTIONS; STRIKE PRICE $320; EXPIRES 06/18/2026</div>
+      </details>
+    </div>
+    
+
+    <div class="lead-card">
+      <div class="lead-header">
+        <div class="lead-rank">#2</div>
+        <div class="lead-meta">
+          <span class="rule-chip" style="background:#AF52DE15;color:#AF52DE;border-color:#AF52DE40">Trade ×  Lobbying</span>
+          <span class="score-chip">Score 95</span>
+          <span class="conf-chip" style="color:#FF9500">● MEDIUM</span>
+        </div>
+      </div>
+      <div class="lead-pitch">Gottheimer bought MSFT options within 90 days of $3.4M in Microsoft federal lobbying — a cross-dataset conflict-of-interest red flag.</div>
+      <div class="lead-meta-line">
+        <strong>Josh Gottheimer</strong> · $MSFT · $50,001 - $100,000
+      </div>
+      <div class="lead-angle">Microsoft spent $3.4M lobbying on AI, cybersecurity, FISA reauthorization, and immigration (H-1B) in the same quarter Gottheimer purchased MSFT call options. These are precisely the issue areas where a House Financial Services or Intelligence-adjacent member could have non-public visibility. The lobbying topics — Section 702, data breach legislation, cloud computing — are active Congressional agenda items. The confluence of lobbying intensity and options purchase timing warrants a deeper look at whether Gottheimer received any committee briefings tied to these specific issues.</div>
+      <div class="headlines"><div class="mini-label">Draft Headlines</div><div class="headline-opt">• MSFT Lobbied, Gottheimer Bought</div><div class="headline-opt">• Gottheimer&#x27;s MSFT Trade Meets $3.4M Lobby Spend</div><div class="headline-opt">• Congress, Calls, and Corporate Lobbying</div></div>
+      <div class="verify"><div class="mini-label">Verify Before Publishing</div><ul><li>Cross-reference Gottheimer&#x27;s committee assignments against the lobbying issues listed (Section 702, cybersecurity, H-1B, AI)</li><li>Pull the full lobbying disclosure from The Gibson Group, LLC on OpenSecrets or the Senate LDA database to confirm issue scope and timing</li><li>Check whether any MSFT-related legislation or committee hearings were scheduled in the 90-day window around the March 25 trade</li></ul></div>
+      <details class="evidence">
+        <summary>Raw data (4 records)</summary>
+        <div class="evidence-row">Representative: Josh Gottheimer · TransactionDate: 2026-03-25 · Ticker: MSFT · Transaction: Purchase · Range: $50,001 - $100,000 · Amount: 50001.0 · Description: CALL OPTIONS; STRIKE PRICE $325; EXPIRES 06/18/2026</div><div class="evidence-row">Date: 2026-04-09 · Amount: 30000.0 · Ticker: MSFT</div><div class="evidence-row">Date: 2026-04-06 · Amount: 50000.0 · Ticker: MSFT</div>
+      </details>
+    </div>
+    
+
+    <div class="lead-card">
+      <div class="lead-header">
+        <div class="lead-rank">#3</div>
+        <div class="lead-meta">
+          <span class="rule-chip" style="background:#AF52DE15;color:#AF52DE;border-color:#AF52DE40">Trade ×  Lobbying</span>
+          <span class="score-chip">Score 95</span>
+          <span class="conf-chip" style="color:#FF9500">● MEDIUM</span>
+        </div>
+      </div>
+      <div class="lead-pitch">Byron Donalds bought Netflix stock within 90 days of $1.2M in NFLX federal lobbying — a small trade with a notable paper trail.</div>
+      <div class="lead-meta-line">
+        <strong>Byron Donalds</strong> · $NFLX · $1,001 - $15,000
+      </div>
+      <div class="lead-angle">The dollar amount here is modest ($1K–$15K), but the optics matter: Donalds purchased NFLX stock while Netflix was actively lobbying Congress on corporate tax proposals. Netflix&#x27;s tax lobbying is directly relevant to Congressional budget and tax committees, and Donalds has been an active voice on fiscal policy. The stock has since outperformed SPY by over 7.5% on an excess return basis, making the timing look even better in hindsight. The story here is pattern — does Donalds have a history of trading in companies actively lobbying on his legislative portfolio?</div>
+      <div class="headlines"><div class="mini-label">Draft Headlines</div><div class="headline-opt">• Donalds Bought Netflix. Netflix Was Lobbying.</div><div class="headline-opt">• The $15K Netflix Trade With a $1.2M Lobby Trail</div><div class="headline-opt">• Donalds&#x27; NFLX Buy Meets Tax Lobby Spend</div></div>
+      <div class="verify"><div class="mini-label">Verify Before Publishing</div><ul><li>Check Donalds&#x27; committee assignments — specifically Ways and Means or Budget Committee membership relevant to corporate tax legislation</li><li>Confirm NFLX lobbying filing via Senate LDA database (Miller &amp; Chevalier, April 2026) and cross-reference with any active tax bills</li><li>Pull Donalds&#x27; full trading history for other names with concurrent lobbying activity</li></ul></div>
+      <details class="evidence">
+        <summary>Raw data (4 records)</summary>
+        <div class="evidence-row">Representative: Byron Donalds · TransactionDate: 2026-03-20 · Ticker: NFLX · Transaction: Purchase · Range: $1,001 - $15,000 · Amount: 1001.0</div><div class="evidence-row">Date: 2026-04-13 · Amount: 10000.0 · Ticker: NFLX</div><div class="evidence-row">Date: 2026-04-09 · Amount: 60000.0 · Ticker: NFLX</div>
+      </details>
+    </div>
+    
+
+    <div class="lead-card">
+      <div class="lead-header">
+        <div class="lead-rank">#4</div>
+        <div class="lead-meta">
+          <span class="rule-chip" style="background:#FF950015;color:#FF9500;border-color:#FF950040">Member Cluster</span>
+          <span class="score-chip">Score 87</span>
+          <span class="conf-chip" style="color:#34C759">● HIGH</span>
+        </div>
+      </div>
+      <div class="lead-pitch">Three Congress members from both parties piled into MSFT within 11 days — a bipartisan cluster worth nearly $857K total.</div>
+      <div class="lead-meta-line">
+        <strong>John Fetterman, Josh Gottheimer, Richard Dean Dr Mccormick</strong> · $MSFT · ~$857K total
+      </div>
+      <div class="lead-angle">Cluster trading by multiple members of Congress in the same ticker within a compressed timeframe is one of the strongest statistical signals of potential information flow. Gottheimer, Fetterman, and McCormick represent different parties and different states — bipartisan clusters are harder to explain away as coincidence or index rebalancing. The Gottheimer position alone is options-based and leveraged. The open question is whether a shared committee briefing, a behind-closed-doors industry meeting, or a pending regulatory action created a common catalyst. MSFT&#x27;s exposure to AI policy, DoD cloud contracts, and antitrust scrutiny gives legislators plenty of potential non-public touch points.</div>
+      <div class="headlines"><div class="mini-label">Draft Headlines</div><div class="headline-opt">• Three Congress Members, One Stock, 11 Days</div><div class="headline-opt">• Bipartisan MSFT Buying Spree Raises Questions</div><div class="headline-opt">• The $857K Congressional Cluster Trade</div></div>
+      <div class="verify"><div class="mini-label">Verify Before Publishing</div><ul><li>Map all three members&#x27; committee assignments and identify any shared committees or joint hearings in the 30 days before the cluster trades</li><li>Check whether any of the three attended the same industry briefings, caucus meetings, or Congressional delegations (CODELs) in that window</li><li>Pull full MSFT trading history for all three members to assess whether this is a one-off or part of a recurring pattern</li></ul></div>
+      <details class="evidence">
+        <summary>Raw data (6 records)</summary>
+        <div class="evidence-row">Representative: Josh Gottheimer · TransactionDate: 2026-03-25 · Ticker: MSFT · Transaction: Purchase · Range: $50,001 - $100,000 · Amount: 50001.0 · Description: CALL OPTIONS; STRIKE PRICE $325; EXPIRES 06/18/2026</div><div class="evidence-row">Representative: Josh Gottheimer · TransactionDate: 2026-03-25 · Ticker: MSFT · Transaction: Purchase · Range: $500,001 - $1,000,000 · Amount: 500001.0 · Description: CALL OPTIONS; STRIKE PRICE $320; EXPIRES 06/18/2026</div><div class="evidence-row">Representative: Richard Dean Dr Mccormick · TransactionDate: 2026-03-19 · Ticker: MSFT · Transaction: Purchase · Range: $1,001 - $15,000 · Amount: 1001.0</div>
+      </details>
+    </div>
+    
+
+    <div class="lead-card">
+      <div class="lead-header">
+        <div class="lead-rank">#5</div>
+        <div class="lead-meta">
+          <span class="rule-chip" style="background:#5856D615;color:#5856D6;border-color:#5856D640">Dark-Pool Confluence</span>
+          <span class="score-chip">Score 82</span>
+          <span class="conf-chip" style="color:#8E8E93">● LOW</span>
+        </div>
+      </div>
+      <div class="lead-pitch">April McClain Delaney sold TECH stock while dark-pool short volume hit 88% of all off-exchange activity in the same period.</div>
+      <div class="lead-meta-line">
+        <strong>April Mcclain Delaney</strong> · $TECH · $1,001 - $15,000
+      </div>
+      <div class="lead-angle">TECH (Benchmark Electronics) showed extreme dark-pool short concentration — 88% of OTC volume was short — just days after McClain Delaney&#x27;s disclosed sale. Dark-pool short spikes of this magnitude often signal institutional positioning ahead of a negative catalyst. The congressional sale and the institutional dark-pool activity aren&#x27;t necessarily linked, but the directional alignment (both bearish) in the same narrow window makes this worth a verify pass. McClain Delaney is a freshman Democrat; checking her committee assignments for any technology or defense procurement overlap would sharpen the story.</div>
+      <div class="headlines"><div class="mini-label">Draft Headlines</div><div class="headline-opt">• 88% Dark-Pool Shorts. One Congress Member Sold.</div><div class="headline-opt">• TECH&#x27;s Shadow Trade and a Congressional Sale</div><div class="headline-opt">• McClain Delaney Sold TECH Before the Dark Pool Lit Up</div></div>
+      <div class="verify"><div class="mini-label">Verify Before Publishing</div><ul><li>Confirm McClain Delaney&#x27;s sale disclosure on House Clerk site and verify the ticker is Benchmark Electronics (TECH) not a tech ETF</li><li>Pull TECH&#x27;s news flow and earnings calendar around March 26 – April 10 to identify any known negative catalysts</li><li>Check McClain Delaney&#x27;s committee assignments for any overlap with defense/tech procurement (TECH&#x27;s primary business)</li></ul></div>
+      <details class="evidence">
+        <summary>Raw data (2 records)</summary>
+        <div class="evidence-row">Representative: April Mcclain Delaney · TransactionDate: 2026-03-26 · Ticker: TECH · Transaction: Sale · Range: $1,001 - $15,000 · Amount: 1001.0</div><div class="evidence-row">Ticker: TECH · Date: 2026-04-10 · OTC_Total: 445694 · DPI: 0.876650585537977</div>
+      </details>
+    </div>
+    
+
+    <div class="lead-card">
+      <div class="lead-header">
+        <div class="lead-rank">#6</div>
+        <div class="lead-meta">
+          <span class="rule-chip" style="background:#5856D615;color:#5856D6;border-color:#5856D640">Dark-Pool Confluence</span>
+          <span class="score-chip">Score 82</span>
+          <span class="conf-chip" style="color:#8E8E93">● LOW</span>
+        </div>
+      </div>
+      <div class="lead-pitch">Fetterman bought Erie Indemnity while dark-pool short volume hit 87% of OTC activity — a directional mismatch worth flagging.</div>
+      <div class="lead-meta-line">
+        <strong>John Fetterman</strong> · $ERIE · $1,001 - $15,000
+      </div>
+      <div class="lead-angle">Fetterman purchased ERIE stock on March 30 while institutional dark-pool traders were aggressively shorting the same name — 87% of all off-exchange volume in ERIE was short as of April 10. The directional mismatch between a sitting senator&#x27;s purchase and heavy institutional short pressure raises a basic question: does Fetterman know something the shorts don&#x27;t, or vice versa? ERIE (Erie Indemnity) is a Pennsylvania-based insurer, and Fetterman represents Pennsylvania — a home-state trade in a regulated industry deserves extra scrutiny. Dollar amount is small but the signal pattern is notable.</div>
+      <div class="headlines"><div class="mini-label">Draft Headlines</div><div class="headline-opt">• Fetterman Bought ERIE. The Dark Pool Shorted It.</div><div class="headline-opt">• Senator&#x27;s Home-State Buy Meets 87% Short Rate</div><div class="headline-opt">• The ERIE Trade That Cuts Both Ways</div></div>
+      <div class="verify"><div class="mini-label">Verify Before Publishing</div><ul><li>Confirm Fetterman&#x27;s ERIE purchase on Senate financial disclosure database and verify it&#x27;s Erie Indemnity Company (ERIE)</li><li>Check whether Fetterman sits on any Senate committees with insurance or financial services jurisdiction</li><li>Pull ERIE&#x27;s news flow and any pending Pennsylvania state/federal insurance regulatory actions around the trade date</li></ul></div>
+      <details class="evidence">
+        <summary>Raw data (2 records)</summary>
+        <div class="evidence-row">Representative: John Fetterman · TransactionDate: 2026-03-30 · Ticker: ERIE · Transaction: Purchase · Range: $1,001 - $15,000 · Amount: 1001.0</div><div class="evidence-row">Ticker: ERIE · Date: 2026-04-10 · OTC_Total: 88391 · DPI: 0.870301789691412</div>
+      </details>
+    </div>
+    
+
+    <div class="lead-card">
+      <div class="lead-header">
+        <div class="lead-rank">#7</div>
+        <div class="lead-meta">
+          <span class="rule-chip" style="background:#AF52DE15;color:#AF52DE;border-color:#AF52DE40">Trade ×  Lobbying</span>
+          <span class="score-chip">Score 80</span>
+          <span class="conf-chip" style="color:#FF9500">● MEDIUM</span>
+        </div>
+      </div>
+      <div class="lead-pitch">Cisneros sold Amazon stock within 90 days of $5.4M in AMZN federal lobbying — and the stock surged 12% after he sold.</div>
+      <div class="lead-meta-line">
+        <strong>Gilbert Cisneros</strong> · $AMZN · $1,001 - $15,000
+      </div>
+      <div class="lead-angle">Cisneros sold AMZN on March 16 and the stock subsequently beat SPY by over 10 percentage points — making this a costly sale in hindsight, but not exculpatory. Amazon was simultaneously running a $5.4M federal lobbying effort on corporate income tax, an issue with direct Congressional relevance. The sale timing and lobbying overlap still warrant scrutiny, particularly if Cisneros has committee exposure to tax or appropriations legislation. The excess return data actually makes the story more interesting: either he missed badly, or he had a reason to exit regardless of upside.</div>
+      <div class="headlines"><div class="mini-label">Draft Headlines</div><div class="headline-opt">• Cisneros Sold Amazon. It Then Surged 12%.</div><div class="headline-opt">• The $5.4M Lobby Trail Behind a Congress Member&#x27;s AMZN Sale</div><div class="headline-opt">• Did Cisneros Exit Amazon Too Early — Or On Purpose?</div></div>
+      <div class="verify"><div class="mini-label">Verify Before Publishing</div><ul><li>Confirm the AMZN sale filing on House Clerk&#x27;s disclosure portal and verify Cisneros&#x27; committee assignments for tax/appropriations overlap</li><li>Check Holland &amp; Knight&#x27;s lobbying filing for AMZN on the Senate LDA database to confirm the corporate tax issue scope</li><li>Assess whether any tax legislation relevant to Amazon was moving through committee around the March 16 sale date</li></ul></div>
+      <details class="evidence">
+        <summary>Raw data (4 records)</summary>
+        <div class="evidence-row">Representative: Gilbert Cisneros · TransactionDate: 2026-03-16 · Ticker: AMZN · Transaction: Sale · Range: $1,001 - $15,000 · Amount: 1001.0</div><div class="evidence-row">Date: 2026-04-10 · Amount: 20000.0 · Ticker: AMZN</div><div class="evidence-row">Date: 2026-03-26 · Amount: 60000.0 · Ticker: AMZN</div>
+      </details>
+    </div>
+    
+
+    <div class="lead-card">
+      <div class="lead-header">
+        <div class="lead-rank">#8</div>
+        <div class="lead-meta">
+          <span class="rule-chip" style="background:#AF52DE15;color:#AF52DE;border-color:#AF52DE40">Trade ×  Lobbying</span>
+          <span class="score-chip">Score 80</span>
+          <span class="conf-chip" style="color:#8E8E93">● LOW</span>
+        </div>
+      </div>
+      <div class="lead-pitch">Cisneros bought DoorDash stock while the company was actively lobbying Congress on drone delivery regulations — a niche but pointed overlap.</div>
+      <div class="lead-meta-line">
+        <strong>Gilbert Cisneros</strong> · $DASH · $1,001 - $15,000
+      </div>
+      <div class="lead-angle">DoorDash&#x27;s lobbying focus here is unmanned aircraft systems (UAS/drones) — a niche regulatory issue that sits squarely in the jurisdiction of the House Transportation and Infrastructure Committee or Science, Space and Technology Committee. If Cisneros has any committee proximity to drone or aviation regulation, this trade becomes significantly more interesting. The dollar amount is small, but the specificity of the lobbying issue — drone delivery is an emerging and actively contested regulatory space — makes the directional alignment worth examining. Note: the lobbying dollar amount listed is $0, which may indicate a new registration or amended filing.</div>
+      <div class="headlines"><div class="mini-label">Draft Headlines</div><div class="headline-opt">• Cisneros Bought DoorDash. Drones Were Being Lobbied.</div><div class="headline-opt">• The Congressman, the Delivery App, and Drone Rules</div><div class="headline-opt">• DoorDash Lobbied on Drones. A Congress Member Bought In.</div></div>
+      <div class="verify"><div class="mini-label">Verify Before Publishing</div><ul><li>Confirm Cisneros&#x27; committee assignments — specifically any aviation, transportation, or technology subcommittee roles</li><li>Pull the Hogan Lovells/DoorDash lobbying filing from Senate LDA to clarify why the dollar amount is $0 and whether a full filing exists</li><li>Check for any pending FAA reauthorization amendments or UAS regulatory actions in the 90-day window around the March 27 purchase</li></ul></div>
+      <details class="evidence">
+        <summary>Raw data (4 records)</summary>
+        <div class="evidence-row">Representative: Gilbert Cisneros · TransactionDate: 2026-03-27 · Ticker: DASH · Transaction: Purchase · Range: $1,001 - $15,000 · Amount: 1001.0</div><div class="evidence-row">Date: 2026-04-08 · Amount: 0.0 · Ticker: DASH</div><div class="evidence-row">Date: 2026-04-06 · Amount: 60000.0 · Ticker: DASH</div>
+      </details>
+    </div>
+    
+
+    <div class="lead-card">
+      <div class="lead-header">
+        <div class="lead-rank">#9</div>
+        <div class="lead-meta">
+          <span class="rule-chip" style="background:#AF52DE15;color:#AF52DE;border-color:#AF52DE40">Trade ×  Lobbying</span>
+          <span class="score-chip">Score 80</span>
+          <span class="conf-chip" style="color:#FF9500">● MEDIUM</span>
+        </div>
+      </div>
+      <div class="lead-pitch">McCormick bought Home Depot stock within 90 days of $900K in HD lobbying on corporate tax rates and sustainability reporting mandates.</div>
+      <div class="lead-meta-line">
+        <strong>Richard Dean Dr Mccormick</strong> · $HD · $1,001 - $15,000
+      </div>
+      <div class="lead-angle">Home Depot&#x27;s lobbying agenda covers corporate tax rates, deductions, and the Corporate Sustainability Reporting Directive — issues directly in play for the current Congress. McCormick is a freshman Republican senator from Pennsylvania with a business and finance background; he has been publicly vocal on corporate tax policy. A purchase of HD stock while the company lobbies on tax legislation that could directly lift its after-tax earnings is a textbook conflict-of-interest pattern, even at small dollar amounts. The excess return here is slightly negative, but the directional alignment of the trade thesis with HD&#x27;s lobbying goals is the real story.</div>
+      <div class="headlines"><div class="mini-label">Draft Headlines</div><div class="headline-opt">• McCormick Bought Home Depot. HD Was Lobbying on Taxes.</div><div class="headline-opt">• The Senator, the Stock, and a Corporate Tax Lobby Push</div><div class="headline-opt">• McCormick&#x27;s HD Trade Meets a $900K Lobby Spend</div></div>
+      <div class="verify"><div class="mini-label">Verify Before Publishing</div><ul><li>Confirm McCormick&#x27;s Senate committee assignments — specifically Banking, Finance, or Budget Committee membership</li><li>Pull Harbinger Strategies&#x27; HD lobbying disclosure from Senate LDA and cross-reference with any active tax or CSRD legislation (P.L. 119-21 cited in filing)</li><li>Check McCormick&#x27;s broader trading history for other names with concurrent corporate tax lobbying activity</li></ul></div>
+      <details class="evidence">
+        <summary>Raw data (4 records)</summary>
+        <div class="evidence-row">Representative: Richard Dean Dr Mccormick · TransactionDate: 2026-03-19 · Ticker: HD · Transaction: Purchase · Range: $1,001 - $15,000 · Amount: 1001.0</div><div class="evidence-row">Date: 2026-01-20 · Amount: 60000.0 · Ticker: HD</div><div class="evidence-row">Date: 2026-01-20 · Amount: 20000.0 · Ticker: HD</div>
+      </details>
+    </div>
+    
+
+    <div class="lead-card">
+      <div class="lead-header">
+        <div class="lead-rank">#10</div>
+        <div class="lead-meta">
+          <span class="rule-chip" style="background:#AF52DE15;color:#AF52DE;border-color:#AF52DE40">Trade ×  Lobbying</span>
+          <span class="score-chip">Score 80</span>
+          <span class="conf-chip" style="color:#8E8E93">● LOW</span>
+        </div>
+      </div>
+      <div class="lead-pitch">Cisneros bought Micron stock while a defense contractor was lobbying on directed energy programs — a semiconductor-defense nexus worth probing.</div>
+      <div class="lead-meta-line">
+        <strong>Gilbert Cisneros</strong> · $MU · $1,001 - $15,000
+      </div>
+      <div class="lead-angle">The MU lobbying entry here is unusual: the registrant is Technical Micronics Control Inc., a defense-adjacent firm lobbying on directed energy programs and defense appropriations — not Micron Technology itself. The ticker match (MU) may be coincidental or a data artifact, but if Cisneros has any Armed Services or Appropriations Committee exposure, the timing of a Micron purchase alongside active defense appropriations lobbying is worth a second look. Micron is a key domestic semiconductor supplier for defense applications, and the CHIPS Act has created significant legislative interest in the sector. The stock outperformed SPY by 5.7% after purchase.</div>
+      <div class="headlines"><div class="mini-label">Draft Headlines</div><div class="headline-opt">• Cisneros Bought Micron. Defense Lobbying Followed.</div><div class="headline-opt">• The Semiconductor Trade With a Defense Lobby Footnote</div><div class="headline-opt">• MU, a Congress Member, and a Defense Appropriations Angle</div></div>
+      <div class="verify"><div class="mini-label">Verify Before Publishing</div><ul><li>Verify whether the lobbying registrant &#x27;Technical Micronics Control Inc.&#x27; is genuinely linked to Micron Technology (MU) or if this is a ticker data mismatch</li><li>Check Cisneros&#x27; committee assignments for Armed Services, Appropriations, or Science/Technology subcommittee roles</li><li>Cross-reference the defense appropriations bills cited in the lobbying filing (H.R.3838, H.R.4016) with any committee activity Cisneros participated in</li></ul></div>
+      <details class="evidence">
+        <summary>Raw data (4 records)</summary>
+        <div class="evidence-row">Representative: Gilbert Cisneros · TransactionDate: 2026-03-25 · Ticker: MU · Transaction: Purchase · Range: $1,001 - $15,000 · Amount: 1001.0</div><div class="evidence-row">Date: 2026-04-02 · Amount: 15000.0 · Ticker: MU</div><div class="evidence-row">Date: 2026-01-20 · Amount: 30000.0 · Ticker: MU</div>
+      </details>
+    </div>
+    
+<div class="footer">
+  Built by the Quiver Research Engine · Deterministic scoring + Claude narration · Re-runnable any Sunday
+</div>
+</div></body></html>

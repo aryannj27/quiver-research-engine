@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Visual Concept 2 — Cluster Timeline</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+       background: #f5f5f7; color: #1d1d1f; padding: 32px; }
+.wrap { max-width: 1000px; margin: 0 auto; }
+.header { margin-bottom: 24px; }
+.eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+           color: #007AFF; margin-bottom: 8px; }
+h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 6px; }
+.sub { color: #636366; font-size: 1rem; margin-bottom: 20px; }
+.card { background: #fff; border-radius: 14px; padding: 24px; border: 1px solid rgba(0,0,0,0.06);
+        margin-bottom: 16px; }
+.card h2 { font-size: 1.15rem; font-weight: 600; margin-bottom: 10px; }
+.card p { color: #424245; font-size: 0.95rem; margin-bottom: 8px; }
+.label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+         color: #86868b; margin-bottom: 6px; }
+.insight-line { font-size: 1.1rem; font-weight: 500; color: #1d1d1f; margin-bottom: 6px;
+                letter-spacing: -0.2px; }
+.sowhat { background: linear-gradient(135deg, #007AFF 0%, #5856D6 100%); color: #fff;
+          border-radius: 10px; padding: 14px 18px; margin-top: 12px; }
+.sowhat .label { color: rgba(255,255,255,0.75); }
+.sowhat p { color: #fff; margin: 0; font-size: 0.95rem; }
+
+/* Timeline wireframe */
+.timeline-wire { background: #fafafb; border: 1px dashed #c7c7cc; border-radius: 10px;
+                 padding: 28px 20px; margin: 12px 0; position: relative; }
+.tl-ticker { display: grid; grid-template-columns: 70px 1fr 80px; gap: 12px; align-items: center;
+             padding: 12px 0; border-bottom: 1px solid #e5e5e7; }
+.tl-ticker:last-child { border-bottom: none; }
+.tl-ticker-name { font-weight: 700; color: #1d1d1f; font-size: 0.95rem; }
+.tl-ticker-sub { font-size: 10px; color: #86868b; }
+.tl-track { position: relative; height: 32px; background: #f5f5f7; border-radius: 16px;
+            overflow: hidden; }
+.tl-track-baseline { position: absolute; top: 50%; left: 10px; right: 10px;
+                      border-top: 1px dashed #c7c7cc; }
+.tl-dot { position: absolute; top: 50%; transform: translate(-50%, -50%);
+          width: 14px; height: 14px; border-radius: 50%; border: 2px solid #fff;
+          cursor: pointer; }
+.tl-dot.buy { background: #34C759; }
+.tl-dot.sell { background: #FF3B30; }
+.tl-dot.big { width: 20px; height: 20px; }
+.tl-dot-label { position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+                font-size: 9px; color: #424245; white-space: nowrap;
+                background: #fff; padding: 1px 5px; border-radius: 3px;
+                border: 1px solid #e5e5e7; }
+.tl-cluster-badge { background: linear-gradient(135deg,#FF9500,#FF1D58); color: #fff;
+                     padding: 4px 10px; border-radius: 5px; font-size: 10px; font-weight: 700;
+                     text-align: center; }
+.tl-quiet { color: #86868b; font-style: italic; text-align: center; font-size: 0.85rem; }
+.tl-axis { display: flex; justify-content: space-between; font-size: 10px; color: #86868b;
+           padding: 0 10px; margin-top: 6px; }
+
+.note-box { background: #fff9ec; border-left: 4px solid #FF9500; padding: 12px 16px;
+            border-radius: 8px; margin-top: 12px; font-size: 0.88rem; color: #424245; }
+.legend-row { display: flex; gap: 18px; flex-wrap: wrap; margin: 10px 0 0 0; font-size: 0.82rem; color: #636366; }
+.legend-dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; vertical-align: middle; margin-right: 6px; border: 2px solid #fff; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="header">
+  <div class="eyebrow">Visual Concept 2 of 2 — Wireframe</div>
+  <h1>Cluster Timeline</h1>
+  <p class="sub">At-a-glance visualization of congressional trading clusters — spot the moments when multiple members converge on a ticker.</p>
+</div>
+
+<div class="card">
+  <div class="label">The Insight</div>
+  <p class="insight-line">Congressional trades become newsworthy when they move together.</p>
+  <p>One senator buying NVDA is noise. Five senators buying NVDA in the same week is a story. The current Quiver product shows trades as a table — chronological, one per row. That format hides clusters. A calendar-style timeline makes them unmissable.</p>
+</div>
+
+<div class="card">
+  <div class="label">Wireframe</div>
+  <div class="timeline-wire">
+    <div style="font-size:11px;color:#86868b;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;">Top congress-traded tickers · last 30 days</div>
+
+    <div class="tl-ticker">
+      <div>
+        <div class="tl-ticker-name">MSFT</div>
+        <div class="tl-ticker-sub">3 members</div>
+      </div>
+      <div class="tl-track">
+        <div class="tl-track-baseline"></div>
+        <div class="tl-dot buy big" style="left:68%;" title="Gottheimer $500K-$1M call options">
+          <div class="tl-dot-label">Gottheimer $500K+</div>
+        </div>
+        <div class="tl-dot buy" style="left:72%;" title="Khanna $15K-$50K"></div>
+        <div class="tl-dot buy" style="left:75%;" title="McCaul $50K-$100K"></div>
+      </div>
+      <div class="tl-cluster-badge">CLUSTER</div>
+    </div>
+
+    <div class="tl-ticker">
+      <div>
+        <div class="tl-ticker-name">NFLX</div>
+        <div class="tl-ticker-sub">2 members</div>
+      </div>
+      <div class="tl-track">
+        <div class="tl-track-baseline"></div>
+        <div class="tl-dot buy" style="left:55%;"></div>
+        <div class="tl-dot buy" style="left:56%;"></div>
+      </div>
+      <div style="font-size:10px;color:#86868b;text-align:center;">below threshold</div>
+    </div>
+
+    <div class="tl-ticker">
+      <div>
+        <div class="tl-ticker-name">BP</div>
+        <div class="tl-ticker-sub">1 member</div>
+      </div>
+      <div class="tl-track">
+        <div class="tl-track-baseline"></div>
+        <div class="tl-dot buy" style="left:50%;"></div>
+        <div class="tl-dot buy" style="left:52%;"></div>
+      </div>
+      <div style="font-size:10px;color:#86868b;text-align:center;">single member</div>
+    </div>
+
+    <div class="tl-ticker">
+      <div>
+        <div class="tl-ticker-name">TTD</div>
+        <div class="tl-ticker-sub">1 member</div>
+      </div>
+      <div class="tl-track">
+        <div class="tl-track-baseline"></div>
+        <div class="tl-dot sell" style="left:55%;"></div>
+        <div class="tl-dot sell" style="left:55.3%;"></div>
+      </div>
+      <div style="font-size:10px;color:#86868b;text-align:center;">single member</div>
+    </div>
+
+    <div class="tl-ticker">
+      <div>
+        <div class="tl-ticker-name">PEP</div>
+        <div class="tl-ticker-sub">1 member</div>
+      </div>
+      <div class="tl-track">
+        <div class="tl-track-baseline"></div>
+        <div class="tl-dot sell" style="left:80%;"></div>
+      </div>
+      <div style="font-size:10px;color:#86868b;text-align:center;">&nbsp;</div>
+    </div>
+
+    <div class="tl-axis">
+      <span>30d ago</span><span>20d ago</span><span>10d ago</span><span>today</span>
+    </div>
+
+    <div class="legend-row" style="padding-top:14px;border-top:1px solid #e5e5e7;margin-top:14px;">
+      <span><span class="legend-dot" style="background:#34C759"></span>Buy</span>
+      <span><span class="legend-dot" style="background:#FF3B30"></span>Sell</span>
+      <span>● Larger dot = larger dollar range</span>
+      <span><span style="background:linear-gradient(135deg,#FF9500,#FF1D58);color:#fff;padding:1px 6px;border-radius:3px;font-size:9px;">CLUSTER</span> = 3+ members, same direction, 14d window</span>
+    </div>
+  </div>
+  <div class="note-box">
+    <strong>Production notes:</strong> Above is a wireframe rendered in static HTML/CSS to prove the layout works. In production, this becomes a Chart.js / D3 scatter plot with live Quiver API data, hover tooltips showing member name + disclosure link, and a filter bar (House/Senate, Party, direction, dollar threshold). Rendering time &lt;200ms for 30-day lookback on full congress data.
+  </div>
+</div>
+
+<div class="card">
+  <div class="label">The Design — Why This Layout</div>
+  <p><strong>Horizontal time axis, tickers stacked vertically.</strong> Each row is a ticker. Each dot is one trade. Dots colored by direction (green/red), sized by dollar range. When dots bunch up within a 14-day window on the same row with the same color, the CLUSTER badge lights up. That's the anomaly.</p>
+  <p>A single chart replaces what is currently 50+ rows of tabular data. Pattern recognition happens pre-cognitively.</p>
+</div>
+
+<div class="card">
+  <div class="sowhat">
+    <div class="label">The "So What" — if a retail investor sees this at 7 AM Tuesday</div>
+    <p>They scroll the chart. Their eye catches the orange CLUSTER badge on MSFT. They see three green dots bunched together, one noticeably bigger. They read the label: "Gottheimer $500K+". They now know — without reading a single sentence of text — that three members of Congress just converged on Microsoft in a single week, with one of them making an unusually large leveraged bet. That is the entire story, delivered in one image. The newsletter then provides the context.</p>
+  </div>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Quiver Sunday Research SOP — The AI Playbook</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+       background: #f5f5f7; color: #1d1d1f; line-height: 1.6; padding: 32px; }
+.wrap { max-width: 880px; margin: 0 auto; }
+.header { background: linear-gradient(135deg, #000 0%, #1a1a2e 100%); color: #fff;
+          border-radius: 16px; padding: 32px; margin-bottom: 24px;
+          position: relative; overflow: hidden; }
+.header::after { content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px;
+                 background: radial-gradient(circle, rgba(255,29,88,0.2) 0%, transparent 70%); }
+.eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+           color: #FF1D58; margin-bottom: 10px; }
+h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 8px; }
+.sub { color: #c7c7cc; font-size: 1rem; }
+
+h2 { font-size: 1.35rem; font-weight: 600; margin: 36px 0 6px 0; letter-spacing: -0.3px;
+     padding-bottom: 8px; border-bottom: 2px solid #1d1d1f; }
+h3 { font-size: 1.1rem; font-weight: 600; margin: 24px 0 8px 0; }
+.section-sub { font-size: 0.9rem; color: #86868b; margin-bottom: 18px; }
+
+.card { background: #fff; border-radius: 12px; padding: 20px 24px; margin-bottom: 14px;
+        border: 1px solid rgba(0,0,0,0.06); }
+p { margin-bottom: 10px; color: #424245; }
+ul, ol { margin: 8px 0 12px 24px; color: #424245; }
+li { margin-bottom: 4px; }
+code { font-family: 'SF Mono', Menlo, monospace; font-size: 0.85em;
+       background: #f5f5f7; padding: 2px 6px; border-radius: 4px; color: #d6336c; }
+pre { background: #1d1d1f; color: #57D7BA; border-radius: 10px; padding: 16px 20px;
+      overflow-x: auto; font-family: 'SF Mono', Menlo, monospace; font-size: 0.82rem;
+      line-height: 1.55; margin: 12px 0; }
+pre .c { color: #86868b; font-style: italic; }
+pre .k { color: #FF1D58; }
+pre .s { color: #FFD60A; }
+
+.step-header { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+.step-num { background: #1d1d1f; color: #fff; width: 30px; height: 30px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-weight: 700;
+            font-size: 0.9rem; flex-shrink: 0; }
+.step-time { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
+             color: #FF1D58; background: #fff1f3; padding: 3px 9px; border-radius: 5px; }
+.step-title { font-size: 1.15rem; font-weight: 600; }
+
+.callout { border-radius: 10px; padding: 14px 18px; margin: 14px 0; font-size: 0.92rem; }
+.callout-amber { background: #fffbeb; border-left: 4px solid #FF9500; }
+.callout-blue  { background: #f0f4ff; border-left: 4px solid #007AFF; }
+.callout-green { background: #f0fdf4; border-left: 4px solid #34C759; }
+.callout-red   { background: #fff1f3; border-left: 4px solid #FF1D58; }
+.callout-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+                 color: #636366; margin-bottom: 4px; }
+
+table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.88rem; }
+th { background: #f5f5f7; font-weight: 700; text-align: left; padding: 10px 14px;
+     border-bottom: 2px solid #e5e5e7; font-size: 10px; text-transform: uppercase;
+     letter-spacing: 0.3px; color: #86868b; }
+td { padding: 10px 14px; border-bottom: 1px solid #f0f0f2; vertical-align: top; color: #424245; }
+tr:last-child td { border-bottom: none; }
+
+.decision-tree { background: #fafafb; border: 1px dashed #c7c7cc; border-radius: 10px;
+                 padding: 18px 22px; font-size: 0.9rem; }
+.decision-tree .dt-q { font-weight: 600; color: #1d1d1f; margin-top: 10px; }
+.decision-tree .dt-a { padding-left: 20px; color: #424245; }
+
+.prompt-box { background: #0d0d0f; color: #e5e5ea; border-radius: 10px; padding: 16px 20px;
+              margin: 10px 0; font-size: 0.85rem; line-height: 1.6; white-space: pre-wrap;
+              font-family: 'SF Mono', Menlo, monospace; }
+.prompt-box .label { color: #FF1D58; font-weight: 700; letter-spacing: 0.5px; font-size: 10px;
+                     text-transform: uppercase; margin-bottom: 6px; display: block; }
+
+.toc { background: #fff; border-radius: 12px; padding: 20px 24px; margin-bottom: 24px;
+       border: 1px solid rgba(0,0,0,0.06); }
+.toc h3 { margin-top: 0; font-size: 1rem; color: #86868b; text-transform: uppercase;
+          letter-spacing: 1px; font-weight: 700; }
+.toc ol { list-style: none; margin-left: 0; counter-reset: toc; }
+.toc li { counter-increment: toc; padding: 6px 0; border-bottom: 1px solid #f0f0f2; }
+.toc li:last-child { border-bottom: none; }
+.toc li::before { content: counter(toc, decimal-leading-zero) ". "; color: #FF1D58;
+                  font-weight: 700; margin-right: 8px; }
+.toc a { color: #1d1d1f; text-decoration: none; }
+.toc a:hover { color: #FF1D58; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="header">
+  <div class="eyebrow">Deliverable 3 · The AI Playbook</div>
+  <h1>The Sunday Research SOP</h1>
+  <p class="sub">A step-by-step operating procedure for running Quiver's automated research engine every Sunday. Written so David — or any future intern — can execute it without calling the author.</p>
+</div>
+
+<div class="toc">
+  <h3>Contents</h3>
+  <ol>
+    <li><a href="#prereq">Prerequisites (one-time setup, 10 minutes)</a></li>
+    <li><a href="#s1">6:00 PM — Pull the data</a></li>
+    <li><a href="#s2">6:15 PM — Run the scorer</a></li>
+    <li><a href="#s3">6:30 PM — Claude narration</a></li>
+    <li><a href="#s4">6:40 PM — Verify each lead</a></li>
+    <li><a href="#s5">7:00 PM — Package for Monday</a></li>
+    <li><a href="#decision">The scoring decision tree</a></li>
+    <li><a href="#prompts">The actual prompts (copy-pasteable)</a></li>
+    <li><a href="#didnt">What didn't work (and why)</a></li>
+    <li><a href="#extend">What to extend next</a></li>
+    <li><a href="#when-empty">When the system finds nothing</a></li>
+  </ol>
+</div>
+
+<h2 id="prereq">Prerequisites</h2>
+<p class="section-sub">One-time setup. Ten minutes.</p>
+<div class="card">
+<ol>
+  <li>Clone the repo. <code>pip install -r requirements.txt</code>.</li>
+  <li>Create a <code>.env</code> file from <code>.env.example</code>. Populate:
+    <ul>
+      <li><code>QUIVER_API_KEY</code> — from the Quiver dashboard.</li>
+      <li><code>ANTHROPIC_API_KEY</code> — for the narration step. Sonnet 4.6 is the model.</li>
+    </ul>
+  </li>
+  <li>Source the env: <code>export $(cat .env | xargs)</code>.</li>
+  <li>Dry run: <code>python run.py</code>. Expected runtime ~90 seconds.</li>
+</ol>
+<div class="callout callout-blue">
+  <div class="callout-label">Checking you're set up right</div>
+  On a successful dry run, you should see lines ending in <code>✓ Open: output/sunday_brief_YYYY-MM-DD.html</code>. Open that file in any browser. If you see at least one ranked lead card, you are done.
+</div>
+</div>
+
+<!-- STEP 1 -->
+<h2 id="s1">Sunday Evening — The 60-Minute Sprint</h2>
+<p class="section-sub">Every Sunday, 6:00 PM — 7:00 PM ET. One hour, four commands, one brief.</p>
+
+<div class="card">
+  <div class="step-header">
+    <div class="step-num">1</div><div class="step-title">Pull the data</div>
+    <div class="step-time">6:00 PM · ~40s</div>
+  </div>
+  <pre><span class="c"># From the repo root:</span>
+<span class="k">python</span> pull.py</pre>
+  <p>This hits five endpoint families:</p>
+  <table>
+    <tr><th>Endpoint</th><th>What you get</th><th>Flakiness</th></tr>
+    <tr><td><code>/beta/live/congresstrading</code></td><td>~200 most recent congressional trades with ExcessReturn baked in</td><td>Reliable</td></tr>
+    <tr><td><code>/beta/live/offexchange</code></td><td>~500 tickers with daily OTC volume and DPI (dark pool index)</td><td>Reliable</td></tr>
+    <tr><td><code>/beta/live/insiders?ticker=X</code></td><td>Executive / director Form 4 transactions for a single ticker</td><td><strong>Flaky.</strong> Bulk endpoint has DB timeouts; per-ticker works.</td></tr>
+    <tr><td><code>/beta/historical/lobbying/X</code></td><td>Quarterly lobbying filings with specific issues lobbied</td><td>Reliable per-ticker</td></tr>
+    <tr><td><code>/beta/historical/govcontracts/X</code></td><td>Quarterly federal contract rollups for a single ticker</td><td>Reliable per-ticker</td></tr>
+  </table>
+  <p>The pull script auto-picks the top 15 tickers by congressional activity and enriches only those — this keeps runtime under 2 minutes and well under rate limits.</p>
+
+  <div class="callout callout-amber">
+    <div class="callout-label">If the pull fails</div>
+    <strong>Empty congress data:</strong> Check <code>curl -H "Authorization: Token $QUIVER_API_KEY" https://api.quiverquant.com/beta/live/congresstrading | head</code>. If it returns HTML, your key is likely invalid or rate-limited. Wait 5 min and retry.<br>
+    <strong>QueuePool / SQLAlchemy errors:</strong> That's a Quiver backend hiccup. The script logs and skips. You will see <code>[quiver-db-timeout]</code> in stderr. Proceed anyway — the pipeline degrades gracefully.
+  </div>
+</div>
+
+<!-- STEP 2 -->
+<div class="card">
+  <div class="step-header">
+    <div class="step-num">2</div><div class="step-title">Run the scorer</div>
+    <div class="step-time">6:15 PM · ~5s</div>
+  </div>
+  <pre><span class="k">python</span> score.py</pre>
+  <p>This runs seven deterministic rules over the pulled data. Output is a ranked JSON list of leads in <code>data/leads_latest.json</code> plus a terminal preview of the top 10. A good Sunday produces 5–15 leads total; 2–5 make it to the final narrated brief.</p>
+
+  <div class="callout callout-blue">
+    <div class="callout-label">What counts as a "good" Sunday</div>
+    At least one lead scored 80+ = there's a real story for Monday. No leads above 70 = it's a quiet week (happens). See the <a href="#when-empty">empty-brief protocol</a>.
+  </div>
+</div>
+
+<!-- STEP 3 -->
+<div class="card">
+  <div class="step-header">
+    <div class="step-num">3</div><div class="step-title">Claude narration</div>
+    <div class="step-time">6:30 PM · ~20s · ~$0.05</div>
+  </div>
+  <pre><span class="k">python</span> narrate.py</pre>
+  <p>This sends the top 10 ranked leads to Claude Sonnet 4.6 with the Quiver editorial voice prompt (see <a href="#prompts">prompts section</a>). Claude returns, for each lead:</p>
+  <ul>
+    <li><strong>pitch</strong> — one sentence, Pelosi Principle compressed</li>
+    <li><strong>angle</strong> — one paragraph, why this matters</li>
+    <li><strong>verify</strong> — 2–3 concrete verification steps</li>
+    <li><strong>headline</strong> — 3 draft headlines, punchy, &lt;10 words each</li>
+    <li><strong>confidence</strong> — high / medium / low</li>
+  </ul>
+  <p>Important: Claude never sees raw anomaly-detection data. It only sees pre-scored, pre-verified signals. Claude writes. Python thinks. This split is the whole point.</p>
+</div>
+
+<!-- STEP 4 -->
+<div class="card">
+  <div class="step-header">
+    <div class="step-num">4</div><div class="step-title">Verify each lead (the human-in-the-loop step)</div>
+    <div class="step-time">6:40 PM · ~15 min</div>
+  </div>
+  <p>The system can surface a lead but cannot publish one. For each lead in the top 5, spend 2–3 minutes doing the following manual checks:</p>
+  <ol>
+    <li><strong>Confirm the disclosure.</strong> Search the member's name on the House clerk site (<code>disclosures-clerk.house.gov</code>) or the Senate eFD portal. Quiver can occasionally be stale by a day or two.</li>
+    <li><strong>Check committee assignments.</strong> Does the member actually sit on a committee with jurisdiction over the traded ticker's sector? <code>clerk.house.gov/Members</code> or <code>senate.gov/general/committee_assignments</code>.</li>
+    <li><strong>Look for the catalyst.</strong> Is there a pending vote, markup, or hearing related to the ticker's industry? Google: <code>"[ticker industry] committee markup [current month]"</code>.</li>
+    <li><strong>Check for dupe coverage.</strong> Has Bloomberg, Reuters, or another newsletter already published this? Search <code>"[member name] [ticker]"</code> in Google News, past week.</li>
+  </ol>
+  <div class="callout callout-green">
+    <div class="callout-label">Pro tip</div>
+    A lead that passes all four checks is publishable. A lead that fails #4 (already covered elsewhere) drops to the "mention" pile — reference it in the Tuesday newsletter with an original angle, don't lead with it.
+  </div>
+</div>
+
+<!-- STEP 5 -->
+<div class="card">
+  <div class="step-header">
+    <div class="step-num">5</div><div class="step-title">Package for Monday</div>
+    <div class="step-time">7:00 PM · ~2 min</div>
+  </div>
+  <pre><span class="k">python</span> brief.py</pre>
+  <p>Renders the final self-contained HTML brief at <code>output/sunday_brief_YYYY-MM-DD.html</code>. Forward this file (or paste-to-Notion) to David. Done.</p>
+  <p>Or just run the whole pipeline end-to-end with <code>python run.py</code>. Single command. Same result.</p>
+</div>
+
+<!-- DECISION TREE -->
+<h2 id="decision">The Scoring Decision Tree</h2>
+<p class="section-sub">How the scorer decides what to flag. All thresholds tunable in <code>score.py</code>.</p>
+
+<div class="decision-tree">
+  <div class="dt-q">Is it a congressional options trade ≥ $15K? (R1)</div>
+  <div class="dt-a">Yes → score 55 + dollar-magnitude boost + profile boost. Auto-flag.</div>
+
+  <div class="dt-q">Is it a congressional stock trade ≥ $100K? (R2)</div>
+  <div class="dt-a">Yes → score 40 + dollar boost + excess-return boost.</div>
+
+  <div class="dt-q">Did the same member trade ticker X within 90 days of lobbying activity on X? (R3)</div>
+  <div class="dt-a">Yes → score 70 + profile boost. This is the highest-signal single rule.</div>
+
+  <div class="dt-q">Did the member trade ticker X in same/adjacent quarter to a 1.5×+ spike in X's federal contracts? (R4)</div>
+  <div class="dt-a">Yes → score 75 + profile boost + large-contract boost.</div>
+
+  <div class="dt-q">Did ≥ 3 members trade the same ticker in the same direction within 14 days? (R5)</div>
+  <div class="dt-a">Yes → score 50 + member-count boost + bipartisan boost. Bipartisan clusters are highest priority.</div>
+
+  <div class="dt-q">Does a ticker have elevated dark-pool short rate (DPI &gt; 0.55) AND congressional activity? (R6)</div>
+  <div class="dt-a">Yes → score 45 + DPI-magnitude boost.</div>
+
+  <div class="dt-q">Are insiders net-selling $10M+ in 30 days on a ticker Congress is also trading? (R7)</div>
+  <div class="dt-a">Yes → score 60 + dollar-magnitude boost. Strongest when congress is also selling.</div>
+</div>
+
+<h3>The "name recognizability" boost</h3>
+<p>Any lead featuring one of ~20 high-profile names gets a +15 bump. The current list is in <code>score.py → HIGH_PROFILE</code> and includes Pelosi, Gottheimer, Crenshaw, Tuberville, Warren, Cruz, Schumer, McConnell, and others. This is editable. The list reflects who David's readers recognize, not who is most active.</p>
+
+<!-- PROMPTS -->
+<h2 id="prompts">The Actual Prompts</h2>
+<p class="section-sub">Copy-pasteable. Already in <code>narrate.py</code>. Included here so David can tune the voice without digging into code.</p>
+
+<div class="prompt-box"><span class="label">System Prompt</span>You write for Quiver Quantitative, a financial newsletter read by 317,000+ retail investors. The voice: data-first, punchy, conversational. Think Morning Brew meets a Bloomberg terminal. Every story follows the "Pelosi Principle": a clear NAME + CONFLICT + DOLLAR AMOUNT. You are the analyst behind the analyst — you do NOT write final stories. You produce short research briefs for the Head of Sales, David Love, so he can decide which leads to turn into full stories on Monday morning.
+
+For each lead you receive, produce a JSON object with these fields:
+  - "pitch":       one sentence (≤25 words). The hook. Pelosi Principle compressed.
+  - "angle":       one paragraph (3-4 sentences). Why this matters. What to investigate.
+  - "verify":      2-3 concrete verification steps (committee lookup, SEC filing check, etc).
+  - "headline":    3 draft headline options, each ≤10 words, punchy.
+  - "confidence":  "high" | "medium" | "low" — your editorial confidence this is a real story.
+
+Output ONLY a JSON array of these objects, in the same order as input. No preamble, no markdown fences.</div>
+
+<p><strong>Why few-shot.</strong> The prompt includes one example lead (a hypothetical Pelosi NVDA options trade) and its ideal narration. This anchors Claude to the Quiver voice within the first response — no warm-up turns needed. The example is fictional (clearly marked) so Claude cannot hallucinate it as fact in the output.</p>
+
+<p><strong>Why JSON output.</strong> Forces structured output so <code>brief.py</code> can render without parsing natural-language ambiguity. Saves David from having to copy-edit Claude's prose — each field lands in a specific slot in the HTML brief.</p>
+
+<p><strong>Why Sonnet 4.6, not Opus.</strong> For narrating 10 already-scored leads, Sonnet is fast enough (sub-20s) and accurate enough. Opus is overkill and 5× the cost. Haiku is too loose on voice. Sonnet is the right tier.</p>
+
+<p><strong>Tunable knob.</strong> Change <code>TOP_N</code> in <code>narrate.py</code> to narrate more or fewer leads. More leads = more Claude tokens = slightly higher cost. Recommend keeping at 10; below that you lose range, above you lose signal-to-noise.</p>
+
+<!-- WHAT DIDN'T WORK -->
+<h2 id="didnt">What Didn't Work (And Why)</h2>
+<p class="section-sub">Rules I prototyped and dropped. Included for epistemic transparency — if David or a future intern is tempted to re-add these, here is why I didn't.</p>
+
+<div class="card">
+  <h3>Dropped: "Trade timing vs earnings date" rule</h3>
+  <p>I tried flagging congressional trades within ±7 days of earnings. The intuition was that trading immediately pre-earnings signals inside information. In practice, this rule surfaced mostly noise: ~60% of S&P 500 tickers are within ±7 days of earnings at any given moment, so essentially every congressional trade in a major ticker triggered. Signal died. <strong>Takeaway: temporal rules need tighter joins (earnings + committee assignment + same direction as analyst revisions), not just proximity.</strong></p>
+</div>
+
+<div class="card">
+  <h3>Dropped: "Patent grant delta" rule</h3>
+  <p>Quiver has a patents endpoint with momentum metrics. I considered flagging companies with sudden patent-grant spikes as story fodder. Dropped because patent activity is interesting but not structured around the "name + conflict + dollar" triple. It's a story type for a different newsletter segment (emerging tech, not political-finance overlap). Noted in <a href="#extend">Extend</a>.</p>
+</div>
+
+<div class="card">
+  <h3>Dropped: "LLM-as-anomaly-detector" experiment</h3>
+  <p>Early design: feed raw congressional trade JSON to Claude and ask "find the anomalies." This is the approach David explicitly warned against in the brief, and rightly so. Claude is fantastic at narrating a pre-identified anomaly and terrible at identifying one. The LLM surfaced plausible-sounding but unverifiable patterns ("this pattern suggests coordinated activity...") — confabulation, not analysis. <strong>The hard split between deterministic scoring and LLM narration is the single most important design decision in this system.</strong></p>
+</div>
+
+<!-- EXTEND -->
+<h2 id="extend">What to Extend Next</h2>
+<p class="section-sub">Features I deliberately deferred. Roughly ordered by ROI.</p>
+<ol>
+  <li><strong>13F position-change signals.</strong> Cross-reference congressional buys with institutional accumulation. High signal, 1 day of work.</li>
+  <li><strong>Wikipedia traffic spike detector.</strong> Wikipedia view counts for ticker pages sometimes precede earnings surprises. Meta-interesting, 2 days.</li>
+  <li><strong>Historical lead backtest.</strong> Run the scorer over the past 12 months; check whether high-scored leads actually became Quiver newsletter stories. Calibrates the thresholds. 3 days.</li>
+  <li><strong>Conflict Web as per-lead image embed.</strong> Auto-generate a PNG of the Conflict Web for every lead scored 80+, embed directly in the HTML brief. Makes the brief self-illustrating. 1 day.</li>
+  <li><strong>Slack bot delivery.</strong> Instead of emailing an HTML file, post top 3 leads to a <code>#sunday-brief</code> Slack channel every Sunday at 7 PM. 0.5 days.</li>
+  <li><strong>Patent & consumer app data.</strong> Pull in Quiver's patent and app-rating endpoints for tech/consumer story angles. Supplementary, not core.</li>
+</ol>
+
+<!-- WHEN EMPTY -->
+<h2 id="when-empty">When the System Finds Nothing</h2>
+<p class="section-sub">Some Sundays the scorer returns no lead above score 70. This is a feature, not a bug.</p>
+<div class="card">
+  <p>Quiet weeks exist. Congress recesses, filings lag, insiders go silent. A research engine that manufactures excitement on quiet weeks is worse than one that honestly reports the absence of signal.</p>
+  <p><strong>Protocol:</strong></p>
+  <ol>
+    <li>Re-run the pull — sometimes Quiver backfills disclosures by Monday morning.</li>
+    <li>Lower the scoring threshold temporarily: change <code>TOP_N = 10</code> to <code>TOP_N = 15</code> in <code>narrate.py</code>, re-render brief.</li>
+    <li>If still nothing above 60 — <strong>send David the brief with a note: "Low-signal week. Top-3 items attached. Consider running a non-anomaly story (retrospective, educational, or industry deep dive)."</strong></li>
+    <li>Log the quiet week in <code>data/quiet_log.md</code>. If 3+ quiet weeks in a row, the rules likely need retuning — too restrictive.</li>
+  </ol>
+  <div class="callout callout-red">
+    <div class="callout-label">What not to do</div>
+    Do not lower the score threshold and pretend a mediocre lead is a strong one. David's readers can tell. The research engine's credibility comes from the weeks it flags real stories — which requires the discipline to flag nothing on the weeks there is nothing.
+  </div>
+</div>
+
+<div style="text-align:center;padding:32px 0;color:#86868b;font-size:0.82rem;">
+  Quiver Research Engine · Sunday SOP · v1.0
+</div>
+
+</div>
+</body>
+</html>
