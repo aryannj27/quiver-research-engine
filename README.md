@@ -1,6 +1,6 @@
 # Quiver Research Engine
 
-An automated Sunday research pipeline for Quiver Quantitative's newsletter team. Built as a case study submission for the Summer 2026 Data Intern role.
+An automated Sunday research pipeline for Quiver Quantitative's newsletter team. Built as a case study submission for the Summer 2026 Intern role.
 
 ## What it does
 
